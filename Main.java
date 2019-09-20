@@ -20,8 +20,6 @@ public class Main {
 }
 class LabArr {
     public byte[] arr = new byte[5];
-    byte max=127;
-    byte min=-128;
     public void procedure(byte a) {
         a = a;
         Scanner in = new Scanner(System.in);
