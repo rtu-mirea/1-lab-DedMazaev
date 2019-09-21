@@ -66,7 +66,7 @@ class LabArr {
     }
     public void task2(byte arr[], byte n){
         int flag=0;
-        for (int i=0,j=n-1; i<n/2; i++,j--) {
+        for (int i=0,j=n-1; i<(n/2); i++,j--) {
             if (arr[i]==arr[j])
                 flag++;
         }
