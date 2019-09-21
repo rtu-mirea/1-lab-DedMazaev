@@ -70,7 +70,7 @@ class LabArr {
             if (arr[i]==arr[j])
                 flag++;
         }
-        if (flag==n/2)
+        if (flag==(n/2))
         System.out.println("Array is symmetrical");
         else System.out.println("Array is not symmetrical");
     }
