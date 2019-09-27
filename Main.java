@@ -43,19 +43,25 @@ public class Main {
 
 
 
-        LabArr one=new LabArr();
-
-        one.task1(u, arr.clone(), n);
-        one.task2(arr.clone());
+        LabArr one=new LabArr(arr);
+        System.out.println("Amount of numbers with amount of digits <" + u + "=" + one.task1(u));
+        if (one.task2()==true)
+        System.out.println("Array is symmetrical");
+                else System.out.println("Array is not symmetrical");
 
     }
 }
 class LabArr {
-    public void task1(byte a, byte arr[], byte n) {           //задание1 количество эелементов с количеством цифр менее введенного
-        byte x = a;
-        byte[] arr1 = arr;
+    public byte arr0[];
+    public LabArr(byte[] arr) {
+       arr0=arr;
+    }
+
+
+    public int task1(byte a) {           //задание1 количество эелементов с количеством цифр менее введенного
+        byte arr1[]=arr0.clone();
         byte sum1 = 0;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < arr1.length; i++) {
             byte sum = 0;
             while (arr1[i] != 0) {
                 sum++;
@@ -63,26 +69,30 @@ class LabArr {
 
             }
             arr1[i] = sum;
-            if (arr[i] < x)
+            if (arr1[i] < a)
                 sum1++;
         }
-        System.out.println("Amount of numbers with amount of digits <" + x + "=" + sum1);
-
-
+        return sum1;
     }
 
-    public void task2(byte arr[]) {       //задание 2 Проверка зеркальности массива
-        byte[] arr1=arr;
-        int n = arr.length;
+    public boolean task2() {       //задание 2 Проверка зеркальности массива
+        byte arr1[]=arr0.clone();
+        int n = arr1.length;
         int count = 0;
                 for (int i = 0; i < (n / 2); i++) {
-                    if (arr[i] != arr[(n - i - 1)])
+                    if (arr1[i] != arr1[(n - i - 1)])
                         count++;
                 }
 
+
                 if (count == 0)
-                    System.out.println("Array is symmetrical");
-                else System.out.println("Array is not symmetrical");
+                   return true;
+                else return false;
 
         }
         }
+
+
+
+
+
