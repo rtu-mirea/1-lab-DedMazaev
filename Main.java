@@ -1,98 +1,167 @@
 package com.company;
-import java.util.Random;
+import org.w3c.dom.Text;
+
+import java.util.Locale;
 import java.util.Scanner;
 
-//Вариант 9 лаб1
-
 public class Main {
-
     public static void main(String[] args) {
-        System.out.println("1.Manual"); //выбор рандом или ручной ввод
-        System.out.println("2.Random");
-        Scanner in = new Scanner(System.in);
-        byte x= in.nextByte();
-        while (x != 1 && x!=2) {
-            System.out.println("Enter 1 or 2");
-            x = in.nextByte();
-        }
-        System.out.println("Enter array size"); //ввод размера массива
-        byte n = in.nextByte();
-        while (n<1) {
-            System.out.println("Array size is incorrect, enter again");
-            n = in.nextByte();
-        }
-        byte[] arr = new byte[n];
-
-        if (x == 1) {
-            System.out.println("Enter array of bytes"); //ввод массива
-            for (int i = 0; i < n; i++) {
-                arr[i] = in.nextByte();
+            int test = 8;
+            Scanner in = new Scanner(System.in);
+            while (test != 0) {
+                try {
+                    System.out.print("[0] - Завершение работы" + '\n' +
+                            "[1] - Вариант на String" + '\n' +
+                            "[2] - Ванриант на StringBuffer" + '\n' +
+                            "[3] - Вариант на регулярные выражения" + '\n' +
+                            "Выберите вариант: ");
+                    test = in.nextInt();
+                    switch (test) {
+                        case 0:
+                            System.out.print("End of working");
+                            break;
+                        case 1:
+                            testStringClass(in);
+                            break;
+                        case 2:
+                            testStringBuilderClass(in);
+                            break;
+                        case 3:
+                            testRegularExpressionsClass(in);
+                            break;
+                        default:
+                            System.out.println("Вы ввели недопустимую конструкцию!");
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
-        } else {
-            new Random().nextBytes(arr);
-            for (int i = 0; i < n; i++) {
 
-                System.out.println(arr[i]);
-
+    }
+    static void testStringClass(Scanner in) throws Exception {
+        TextWork object = new TextWork();
+        int task = 8;
+        while (task != 0){
+            System.out.print("[0] - Предыдущее меню" + '\n' +
+                    "[1] - Ввод строки" + '\n' +
+                    "[2] - Вывод строки" + '\n' +
+                    "[3] - Задание 1" + '\n' +
+                    "[4] - Задание 2" + '\n' +
+                    "[5] - Задание 3" + '\n' +
+                    "[6] - Задание 4" + '\n' +
+                    "Выберете задание: ");
+            task = in.nextInt();
+            switch(task){
+                case 0:
+                    System.out.println("Возвращение к предыдущему меню...");
+                    break;
+                case 1:
+                    System.out.println("Введите текст: ");
+                    in.nextLine();
+                    String str = in.nextLine();
+                    object.inputText(str);
+                    break;
+                case 2:
+                    System.out.println(object.getText());
+                    break;
+                case 3:
+                    object.paragraphSegmentation();
+                    System.out.println("Текст разделенный на параграфы:\n" + object.getText());
+                    break;
+                case 4:
+                    object.toUpperWords();
+                    System.out.println("Текст с прописными буквами:\n" + object.getText());
+                    break;
+                case 5:
+                    System.out.print("Введите номер абзаца: ");
+                    int i = in.nextInt();
+                    System.out.println("Количество слов в абзаце №" + i + " с содержанием \"ам\" равно " + object.findAmIn(i));
+                    break;
+                case 6:
+                    System.out.println("Новая строка с включенным количеством слов:\n" + object.wordNum());
+                    break;
+                default:
+                    System.out.println("Вы ввели недопустимую конструкцию!");
+                    break;
             }
-
         }
-        System.out.println("Enter digit to find elements of array with number of digits < than this digit");
-        byte u=in.nextByte(); //ввод значание для задания 1
-
-
-
-
-        LabArr one=new LabArr(arr);
-        System.out.println("Amount of numbers with amount of digits <" + u + "=" + one.task1(u));
-        if (one.task2()==true)
-        System.out.println("Array is symmetrical");
-                else System.out.println("Array is not symmetrical");
-
+    }
+    static void testStringBuilderClass(Scanner in) {
+        BilderTewtWork object = new BilderTewtWork();
+        int task = 8;
+        while (task != 0){
+            System.out.print("[0] - Предыдущее меню" + '\n' +
+                    "[1] - Ввод строки" + '\n' +
+                    "[2] - Вывод строки" + '\n' +
+                    "[3] - Задание 1" + '\n' +
+                    "[4] - Задание 2" + '\n' +
+                    "[5] - Задание 3" + '\n' +
+                    "Выберете задание: ");
+            task = in.nextInt();
+            switch(task){
+                case 0:
+                    System.out.println("Возвращение к предыдущему меню...");
+                    break;
+                case 1:
+                    System.out.println("Введите текст: ");
+                    in.nextLine();
+                    String str = in.nextLine();
+                    object.inputText(new StringBuilder(str));
+                    break;
+                case 2:
+                    System.out.println(object.getText());
+                    break;
+                case 3:
+                    object.paragraphSegmentation();
+                    System.out.println("Текст разделенный на параграфы:\n" + object.getText());
+                    break;
+                case 4:
+                    object.toUpperWords();
+                    System.out.println("Текст с прописными буквами:\n" + object.getText());
+                    break;
+                case 5:
+                    //ривет мир. я иван люблю делать ам! ам ам ам 3 раза сказал ам всего 4? ам было в 3 абзаце, вот!
+                    object.paragraphNum();
+                    System.out.println("Текст с добавленным предложением:\n" + object.getText());
+                    break;
+                default:
+                    System.out.println("Вы ввели недопустимую конструкцию!");
+                    break;
+            }
+        }
+    }
+    static void testRegularExpressionsClass(Scanner in) {
+        RegularExpression object = new RegularExpression();
+        int task = 8;
+        while (task != 0){
+            System.out.print("[0] - Предыдущее меню" + '\n' +
+                    "[1] - Ввод строки" + '\n' +
+                    "[2] - Вывод строки" + '\n' +
+                    "[3] - Задание 1" + '\n' +
+                    "Выберете задание: ");
+            task = in.nextInt();
+            switch (task){
+                case 0:
+                    System.out.println("Возвращение к предыдущему меню...");
+                    break;
+                case 1:
+                    System.out.println("Введите текст: ");
+                    in.nextLine();
+                    String str = in.nextLine();
+                    object.inputText(str);
+                    break;
+                case 2:
+                    System.out.println("Ваш текст:\n" + object.ghetText());
+                    break;
+                case 3:
+                    object.changeNum();
+                    System.out.println("Измененный текст:\n" + object.ghetText());
+                    break;
+                default:
+                    System.out.println("Вы ввели недопустимую конструкцию!");
+                    break;
+            }
+        }
     }
 }
-class LabArr {
-    public byte arr0[];
-    public LabArr(byte[] arr) {
-       arr0=arr;
-    }
-
-
-    public int task1(byte a) {           //задание1 количество эелементов с количеством цифр менее введенного
-        byte arr1[]=arr0.clone();
-        byte sum1 = 0;
-        for (int i = 0; i < arr1.length; i++) {
-            byte sum = 0;
-            while (arr1[i] != 0) {
-                sum++;
-                arr1[i] /= 10;
-
-            }
-            arr1[i] = sum;
-            if (arr1[i] < a)
-                sum1++;
-        }
-        return sum1;
-    }
-
-    public boolean task2() {       //задание 2 Проверка зеркальности массива
-        byte arr1[]=arr0.clone();
-        int n = arr1.length;
-        int count = 0;
-                for (int i = 0; i < (n / 2); i++) {
-                    if (arr1[i] != arr1[(n - i - 1)])
-                        count++;
-                }
-
-
-                if (count == 0)
-                   return true;
-                else return false;
-
-        }
-        }
-
-
-
-
-
